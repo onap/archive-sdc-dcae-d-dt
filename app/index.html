@@ -163,31 +163,6 @@
             document.getElementById("content-container").style.marginLeft = "0";
         }
     </script>
-
-
-    <script src="./bower_components/sdc-pubsub.js"></script>
-    <!-- <script src="./my-lib.js"></script> -->
-    <script>
-        debugger;
-        var pubsub = window.sdcPubSub.PluginPubSub;
-        window.sdc = new pubsub('DCAE-DS', 'https://www.e-access.att.com', ['WINDOW_OUT']);
-        window.sdc.notify('READY');
-        window.sdc.on(function (eventData, event) {
-            console.log('eventData', eventData);
-            console.log('event', event);
-            if (eventData.type === 'WINDOW_OUT') {
-                if (window.location.hash === 'dcae/composition') {
-                    $('#confirm-modal').modal('show');
-                } else {
-                    window.sdc.notify('ACTION_COMPLETED');
-                }
-            } else {
-                window.sdc.notify('ACTION_COMPLETED');
-            }
-        });
-    </script>
-
-
     <!-- endbuild -->
 </body>
 
