@@ -1,0 +1,206 @@
+<!doctype html>
+<html ng-app="dcaeApp">
+<!--<html>-->
+
+<head>
+    <meta charset="utf-8">
+    <title>DCAE App</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <link rel="icon" href="favicon.png" type="image/png">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/dcae/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css(.tmp) styles/main.css -->
+    <!-- <link rel="stylesheet" href="styles/sdc.css"> -->
+    <link rel="stylesheet" href="/dcae/styles/app.css" />
+    <link rel="stylesheet" href="/dcae/styles/catalog.css" />
+
+    <!-- endbuild -->
+
+    <style>
+        /* The side navigation menu */
+
+        .sidenav {
+            height: 100%;
+            /* 100% Full-height */
+            width: 0;
+            /* 0 width - change this with JavaScript */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Stay on top */
+            top: 123px;
+            left: 0;
+            background-color: #dddddd;
+            /* White*/
+            overflow-x: hidden;
+            /* Disable horizontal scroll */
+            padding-top: 60px;
+            /* Place content 60px from the top */
+            transition: 0.5s;
+            /* 0.5 second transition effect to slide in the sidenav */
+        }
+
+        /* The navigation menu links */
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 14px;
+            color: #818181;
+            display: block;
+            transition: 0.3s
+        }
+
+        /* When you mouse over the navigation links, change their color */
+
+        .sidenav a:hover,
+        .offcanvas a:focus {
+            color: #f1f1f1;
+        }
+
+        /* Position and style the close button (top right corner) */
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0px;
+            right: 25px;
+            font-size: 14px;
+            margin-left: 50px;
+        }
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 0px;
+            }
+            .sidenav a {
+                font-size: 14px;
+            }
+        }
+    </style>
+
+</head>
+
+<body ng-controller="AppController as vm" class="{{state.current.bodyClass || ''}} dcaeApp dcae-module">
+
+
+
+    <div id="mainPage" class="container-fluid">
+        <div class="row">
+            <div id="dcaeSidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="#">General</a>
+                <a href="#">Composition</a>
+                <a href="#">Artifact</a>
+            </div>
+            <div id="main" ui-view="dcae"></div>
+        </div>
+    </div>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/dcae/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/dcae/bower_components/angular/angular.js"></script>
+    <script src="/dcae/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/dcae/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+
+    <!-- Main javascripts -->
+    <script src="/dcae/app.module.js"></script>
+    <script src="/dcae/app.env.js"></script>
+    <script src="/dcae/app.route.js"></script>
+    <script src="/dcae/app.controller.js"></script>
+    <script src="/dcae/app.run.js"></script>
+    <script src="/dcae/app.constants.js"></script>
+
+    <!-- Services -->
+    <script src="/dcae/services/cache.service.js"></script>
+    <script src="/dcae/services/users.service.js"></script>
+
+    <!-- Layout javascripts -->
+    <script src="/dcae/core/header/header.module.js"></script>
+    <script src="/dcae/core/header/header.controller.js"></script>
+    <script src="/dcae/core/navigation/navigation.module.js"></script>
+    <script src="/dcae/core/navigation/navigation.controller.js"></script>
+
+    <!-- Pages javascript -->
+    <script src="/dcae/main/main.controller.js"></script>
+
+    <script src="/dcae/main/dashboard/home/home.module.js"></script>
+    <script src="/dcae/main/dashboard/home/home.controller.js"></script>
+
+    <script src="/dcae/main/dashboard/about/about.module.js"></script>
+    <script src="/dcae/main/dashboard/about/about.controller.js"></script>
+
+    <script src="/dcae/main/dashboard/dcaedt/dcaedt.module.js"></script>
+    <script src="/dcae/main/dashboard/dcaedt/dcaedt.values.js"></script>
+    <script src="/dcae/main/dashboard/dcaedt/dcaedt.factory.js"></script>
+    <!--<script src="/dcae/main/dashboard/dcaedt/dcaedt.composition.factory.js"></script>
+
+	<script type="text/javascript" src="/dcae/main/dashboard/dcaedt/dcaedt.composition.services.js"></script>-->
+    <script src="/dcae/main/dashboard/dcaedt/dcaedt.factory.js"></script>
+
+    <script src="/dcae/main/dashboard/dcaedt/dcaedt.controller.js"></script>
+
+    <script src="/dcae/app.config.js"></script>
+    <script>
+        function closeNav() {
+            document.getElementById("dcaeSidenav").style.width = "0";
+            document.getElementById("content-container").style.marginLeft = "0";
+        }
+    </script>
+
+    <script src="./sdc-pubsub.js"></script>
+    <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+        window.userId = getParameterByName('userId');
+        window.userRole = getParameterByName('userRole');
+        window.displayType = getParameterByName('displayType');
+        window.parentUrl = getParameterByName('parentUrl');
+        window.eventsClientId = getParameterByName('eventsClientId');
+
+        var pubsub = window.sdcPubSub.PluginPubSub;
+        window.sdc = new pubsub(window.eventsClientId, window.parentUrl, ['WINDOW_OUT']);
+
+        window.sdc.notify('READY');
+        window.sdc.on(function (eventData, event) {
+            console.log('eventData', eventData);
+            console.log('event', event);
+            if (eventData.type === 'WINDOW_OUT') {
+                if (window.location.hash === '#/dcae/composition') {
+                    $('#confirm-modal').modal('show');
+                } else {
+                    window.sdc.notify('ACTION_COMPLETED');
+                }
+            } else {
+                window.sdc.notify('ACTION_COMPLETED');
+            }
+        });
+    </script>
+
+    <!-- endbuild -->
+</body>
+
+</html>

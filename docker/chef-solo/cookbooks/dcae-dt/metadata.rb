@@ -1,0 +1,7 @@
+name 'dcae-dt'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures dcae-dt'
+long_description 'Installs/Configures dcae-dt'
+version '1.0.0'

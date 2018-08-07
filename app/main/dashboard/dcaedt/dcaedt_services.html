@@ -1,0 +1,79 @@
+<meta http-equiv="cache-control" content="no-cache" />
+
+<div class="dcae-main-container">
+    <!-- <div class="dcae-left-sidebar">
+
+        <div class="dcae-menu-item" ui-sref="dcae.app.home">Home</div>
+        <div class="dcae-menu-item" ng-click="goGeneral(component, component==null)">General
+        </div>
+        <div class="dcae-menu-item selected" ng-click="goServices(component)" data-tests-id="dcae-menu-item-Services">
+            Services
+        </div>
+        <div class="dcae-menu-item" ng-click="goComposition(component, typeFlag)" data-tests-id="dcae-menu-item-Composition">
+            Composition
+        </div>
+    </div> -->
+    <div class="dcae-left-sidebar" left-menu></div>
+
+    <div class="dcae-main-right-container" style="display: flex; justify-content: space-around;">
+
+        <div class="dcae-main-container-body-content" data-ng-class="{'third-party':thirdParty}" data-ui-view="">
+
+            <div class="tlv-loader large" ng-if="loader"></div>
+
+            <div class="left-content">
+                <h2 style="padding-bottom:30px;">
+                    Attach new services
+                </h2>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label for="service">Service Name</label>
+                        <select class="form-control" ng-model="service.uuid" ng-change="VNFIs(service.uuid)" data-ng-options="service.uuid as service.name for service in services"
+                            data-tests-id="Service Name SelectList">
+                            <option value="">Select Service</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12" ng-if="vnfis.length > 0">
+                        <label for="vnfi">VNFI Name</label>
+                        
+                        <select class="form-control" ng-model="vnfi.name" ng-change="vnfiChange(vnfi.name)" data-ng-options="vnfi.name as vnfi.name for vnfi in vnfis"
+                            data-tests-id="VNFI Name SelectList">
+                            <option value="">Select VNFI</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-12" ng-if="vnfis.length == 0 && vnfiTouch" style="color:red">
+                        The selected service has no resource of type VF, please select a different service
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-sm-offset-7 col-sm-2">
+                        <button class="tlv-btn blue" type="button" ng-disabled="showAttach()" ng-click="saveServiceSelection(component,service,vnfi)"
+                            data-tests-id="Attach Button">
+                            Attach
+                        </button>
+                    </div>
+                </div>
+
+                <!-- {{resultInformation2}} -->
+
+            </div>
+        </div>
+
+        <div class="right-content">
+            <h2 style="padding-bottom: 30px;">Service attached</h2>
+            <div style="border: 1px solid #cdcdcd; padding: 1rem;" ng-if="resultInformation2">
+                <span style="padding-right:5px; border-right: 1px solid #cdcdcd;">
+                    {{service.uuid}}
+                </span>
+                <span style="padding-left:5px;" data-tests-id={{vnfi.name}}>
+                    {{vnfi.name}}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

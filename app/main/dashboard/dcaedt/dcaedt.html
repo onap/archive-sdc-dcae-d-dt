@@ -1,0 +1,69 @@
+<div ng-controller="AppController as vm" class="{{state.current.bodyClass || ''}} dcaeApp dcae-module">
+    <loader data-display="isLoading"></loader>
+
+    <div class="dcae-main-container" style="padding: 1rem;">
+
+        <div style="display: flex; justify-content: space-between; margin:10px 0;">
+            <span style="padding-left: 10px; display: flex; align-items: center;">
+                <span ng-if="!VNFs" style="padding-right:3px;">0</span> {{ VNFs.length }} VFCMTS
+            </span>
+
+            <div style="position: relative; margin-right:9px;">
+                <input type='text' ng-model='searchVfc' placeholder="Search" class="form-control" style="border-radius: 2px;width: 400px; height: 32px;line-height: 32px;border: 1px solid #d2d2d2;outline: none;text-indent: 10px; background: white;"
+                />
+                <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+            </div>
+        </div>
+        <!-- <br />
+        <br />
+        <footer>Version: {{ appSettings.version }} </footer> -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: flex-start;">
+            <div class="dcae-dashboard-card">
+                <div class="dcae-dashboard-card-new-content" data-tests-id="AddButtonsArea" data-ng-click="goGeneral(null, true, true)">
+                    <div class="dcae-dashboard-card-new-content-plus" data-ng-show="!displayActions"></div>
+                    <div class="sdc-dashboard-create-element-container" data-ng-show="displayActions">
+                        <!-- <button data-tests-id="createResourceButton" class="tlv-btn-svc_assu outline blue" data-ng-click="goGeneral(null, true, true)">Add VNF
+                            Assurance Template</button>
+                        <button data-tests-id="createResourceButton" class="tlv-btn-svc_assu outline blue" data-ng-click="goGeneral(null, true, false)">Add Service
+                            Assurance Template</button> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="tlv-loader large" ng-if="!VNFs"></div>
+
+            <div data-ng-class="{'sdc-hide-popover': hidePopover}" data-ng-init="component.filterTerm = component.name +  ' '  + component.description + ' ' + component.tags.toString() + ' ' + component.version"
+                class="dcae-dashboard-card ng-scope" data-ng-repeat="component in VNFs | filter:searchVfc" data-ng-class="{'resource' : component.resourceType === 'VFC', 'service' : component.isService(), 'product' : component.isProduct()}">
+
+
+                <div class="dcae-dashboard-card-body" data-ng-click="gui.isLoading || goGeneral(component, false, null)">
+                    <!-- <div class="dcae-dashboard-card-avatar">
+                        <span data-tests-id="asset-type" class="{{component.resourceType}}"></span>
+                    </div> -->
+                    <div class="dcae-vfcmt-title">
+                        <span>{{component.resourceType}}</span>
+                    </div>
+
+                    <!-- <div class="dcae-dashboard-card-edit " data-ng-class="component.lifecycleState" data-tests-id="assetlifecycleState {{getStatus()}}"></div> -->
+                    <div class="dcae-dashboard-card-schema-image sprite-resource-icons defaulticon" style="background-image: url(/sdc1/scripts/images/sprite-resource-icons.e1bcf178b7b79fd5c93f.png);display: inline-block;"
+                        data-tests-id="{{component.categories[0].subcategories[0].uniqueId}}"></div>
+
+                    <div class="dcae-dashboard-card-description">{{component.description}}</div>
+                    <div class="dcae-dashboard-card-info-name-container" style="text-align: left">
+                        <span class="dcae-dashboard-card-info-name" tooltips tooltip-content="{{component.name}}r"> {{component.name}}</span>
+                        <div class="dcae-dashboard-card-info-user">V {{component.version}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dcae-dashboard-card-footer">
+                    <div class="dcae-dashboard-card-info">
+                        <div class="dcae-dashboard-card-info-user" style="font-size: 10px;">
+                            {{component.lifecycleState}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

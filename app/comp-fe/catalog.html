@@ -1,0 +1,57 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="ice.css">
+    <link rel="stylesheet" href="catalog.css">
+    <style type="text/css">
+        #catalogdiv {
+            transform: scale(.7);
+        }
+    </style>
+    <!--<script type="text/javascript" src="js/underscore-min.js"></script>
+    <script type="text/javascript" src="js/d3.min.js"></script>
+    <script type="text/javascript" src="js/react.min.js"></script>-->
+    <script src="catalog.js"></script>
+</head>
+
+<body>
+    <script type="text/javascript">
+        setTimeout(function () {
+            sbox = document.getElementById('searchbox');
+            sbox.onkeypress = function (e) {
+                if (!e) e = window.event;
+                var keyCode = e.keyCode || e.which;
+                if (keyCode == '13') {
+                    dosearch(sbox.value);
+                    return false;
+                }
+            };
+
+        }, 1000);
+    </script>
+    <div id=catalogdiv>
+        <div id=search>
+            <div id=searchfield>
+                catalog search<br>
+                <input id=searchbox size=35 oninput="dosearch" value=".*">
+            </div>
+            <div id="searchitems"></div>
+        </div>
+        <br style="clear:both" />
+        <div id="catalog">
+            <div id="catalogitemlist">
+            </div>
+
+        </div>
+    </div>
+
+    <div id="dragdiv">
+        <div id="dragtext"></div>
+        <div id="innerdragdiv"> </div>
+    </div>
+    <!-- i am going to hell when i die -->
+    <div id="dragcover"> </div>
+    </div>
+</body>
+
+</html>

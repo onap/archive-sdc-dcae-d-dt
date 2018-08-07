@@ -1,0 +1,30 @@
+<div id="full-page-with-header" class="template-layout">
+
+    <header class="banner navbar navbar-default navbar-static-top" role="banner" data-transparent-header="true">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div id="logo" class="logo-white" ui-sref="home"></div>
+            </div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                <ul id="menu-primary-navigation" class="nav navbar-nav">
+                    <li class="menu-home" data-ng-class="{'active': state.current.name==='app.home'}"><a title="home" ui-sref="app.home">Home</a></li>
+                    <li class="menu-contact" data-ng-class="{'active': state.current.name==='app.contactus'}"><a title="Contact Us" ui-sref="app.contactus">Contact Us</a></li>
+                    <li class="menu-login" data-ng-class="{'active': state.current.name==='app.login'}"><a title="Login" ui-sref="app.login">Login</a></li>
+                    <li class="menu-seperator">|</li>
+                    <li class="menu-signup" data-ng-class="{'active': state.current.name==='app.register'}"><a title="Sign Up" ui-sref="app.register">Sign Up</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <div id="content" ui-view="content"></div>
+
+</div>

@@ -1,0 +1,67 @@
+<script>
+    function createScript(src) {
+        var script = document.createElement('script');
+        script.src = src;
+        return script;
+    }
+
+    function createLink(src) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = src;
+        return link;
+    }
+
+    $('head').append(createLink(window.catalogImport + 'composition.css'));
+    $('head').append(createLink(window.catalogImport + 'catalog.css'));
+    $('head').append(createLink(window.catalogImport + 'styles/bootstrap.css'));
+
+    $('body').append(createScript(window.catalogImport + 'js/d3.min.js'));
+    $('body').append(createScript(window.catalogImport + 'js/underscore.js'));
+    $('body').append(createScript(window.catalogImport + 'js/circular-json.js'));
+    $('body').append(createScript(window.catalogImport + 'js/bootstrap.js'));
+    $('body').append(createScript(window.catalogImport + 'js/bootstrap-notify.min.js'));
+    $('body').append(createScript(window.catalogImport + 'config.js'));
+    $('body').append(createScript(window.catalogImport + 'composition.js'));
+    $('body').append(createScript(window.catalogImport + 'asdc-catalog.js'));
+
+</script>
+
+<div id="icecat">
+    <div id="catalogdiv">
+        <div>
+            <div class="mandatory">*</div>
+            <select id="selected-type-mt" class="type-select" data-tests-id="flowTypeSelect">
+                <option value="" disabled selected>Select flow type</option>
+            </select>
+        </div>
+
+        <div id="catalog">
+            <div id="catalogitemlist">
+                <div id="elementquery">[catalog elements]</div>
+            </div>
+            <br>
+            <center>
+                <button class="catalogitem big-btn" id="savebtn">Save</button>
+                <!-- <button class="catalogitem" id="submitbtn">Submit</button> -->
+            </center>
+        </div>
+    </div>
+
+    <div id="compositioncontainer" style="width: 80%"> </div>
+
+    <div id="configeditor" style="visibility:hidden">
+        <div id="configstuff" style="overflow: scroll"></div>
+        <br>
+        <div class="config-fotter">
+            <button type="button" class="btn btn-default" onclick="configclose(this)">Cancel</button>
+            <button type="button" class="btn btn-primary" id="configset">Set</button>
+        </div>
+    </div>
+
+</div>
+
+<input type="hidden" id="componentId" />
+<input type="hidden" id="serviceuuid" />
+<input type="hidden" id="vnfiname" />
+<input type="hidden" id="typeFlag" />

@@ -1,0 +1,22 @@
+<div class="dcae-left-sidebar">
+
+    <div class="dcae-menu-item" ng-class="{selected:page==='home'}" ui-sref="dcae.app.home">
+        Home
+    </div>
+
+    <div class="dcae-menu-item" ng-class="{selected:page==='general'}" ng-click="goGeneral(component, component==null)">
+        General
+    </div>
+
+    <!-- <div class="dcae-menu-item" ng-class="{selected:page==='services'}" ng-style="readOnlyComponent && {'opacity': '0.5','pointer-events':'none' }"
+        ng-click="goServices(component)" data-tests-id="dcae-menu-item-Services">
+        Services
+    </div> -->
+
+
+    <div class="dcae-menu-item" ng-if="component.uuid" ng-class="{selected:page==='composition'}" ng-click="goComposition(component, typeFlag)"
+        ng-style="readOnlyComponent && {'opacity': '0.5','pointer-events':'none' }" data-tests-id="dcae-menu-item-Composition">
+        Composition
+    </div>
+
+</div>

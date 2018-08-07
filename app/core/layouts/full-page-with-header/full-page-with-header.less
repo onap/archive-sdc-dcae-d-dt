@@ -1,0 +1,167 @@
+#full-page-with-header {
+    /*background: url('images/top.jpg') no-repeat 0 0;*/
+
+    #content {
+        padding-top: 70px;
+    }
+
+    /* =============================================================================
+   Header
+   ========================================================================== */
+
+    .banner {
+        -webkit-box-shadow:0 1px 2px rgba(43, 48, 51, 0.08);
+        -moz-box-shadow:0 1px 2px rgba(43, 48, 51, 0.08);
+        box-shadow:0 1px 2px rgba(43, 48, 51, 0.08);
+        z-index:20;
+    }
+
+    .navbar {
+        background-color:#fff;
+        margin-bottom:0;
+    }
+
+    #logo {
+        float:left;
+        display:block;
+        margin:20px 0;
+    }
+    #logo .logo-trans {display:none}
+
+    .navbar .navbar-nav {
+        float:right;
+        text-align:right;
+        margin: 20px 0 0 0;
+    }
+
+    .navbar .navbar-nav > li > a {
+        position:relative;
+        color:#828282;
+        font-weight:600;
+        padding-top: 0;
+        padding-bottom:15px;
+        -webkit-transition:all 0.1s linear;
+        -moz-transition:all 0.1s linear;
+        transition:all 0.1s linear;
+    }
+
+    .navbar .navbar-nav > li > a:after {
+        position:absolute;
+        bottom:7px;
+        left:50%;
+        content:'';
+        width:10px;
+        height:0px;
+        margin-left:-5px;
+        background-color:#fff;
+        -webkit-transition:all 0.1s linear;
+        -moz-transition:all 0.1s linear;
+        transition:all 0.1s linear;
+    }
+
+    .navbar .navbar-nav > li > a:hover {color:#828282}
+
+    .navbar .navbar-nav > li > a:hover:after,
+    .navbar .navbar-nav > li.active > a:after,
+    .navbar .navbar-nav > li.active > a:hover:after,
+    .navbar .navbar-nav > li.active > a:focus:after {
+        position:absolute;
+        bottom:9px;
+        left:50%;
+        content:'';
+        width:20px;
+        height:2px;
+        margin-left:-10px;
+        background-color:#2b8dd6;
+    }
+
+
+    .navbar-nav > li + li {margin-left:2px}
+    .navbar .navbar-nav > li.active > a,
+    .navbar .navbar-nav > li.active > a:hover,
+    .navbar .navbar-nav > li.active > a:focus {
+        color:#828282;
+        background-color:transparent;
+    }
+    .navbar .navbar-nav .dropdown-menu {border-radius:0 !important}
+
+    .navbar .navbar-nav .dropdown-menu li a {position:relative}
+    .navbar .navbar-nav .dropdown-menu li a:after {
+        position:absolute;
+        bottom:2px;
+        left:30px;
+        content:'';
+        width:20px;
+        height:0px;
+        margin-left:-10px;
+        background-color:#fff;
+        -webkit-transition:all 0.1s linear;
+        -moz-transition:all 0.1s linear;
+        transition:all 0.1s linear;
+    }
+    .navbar .navbar-nav .dropdown-menu li a:hover:after {
+        position:absolute;
+        bottom:3px;
+        left:30px;
+        content:'';
+        width:20px;
+        height:2px;
+        margin-left:-10px;
+        background-color:#e2e2e2;
+    }
+
+    .navbar .navbar-nav .dropdown-menu li.active a {
+        background-color:transparent;
+        color:#2b8dd6;
+    }
+
+    .navbar .navbar-nav .dropdown-menu li a:hover,
+    .navbar .navbar-nav .dropdown-menu li.active a:hover {
+        color:#2b8dd6;
+        background-color:transparent;
+    }
+
+    .navbar-collapse {max-height:none}
+    .navbar-collapse ul {margin-bottom:10px}
+
+    /* Transparent Header */
+    .banner[data-transparent-header="true"] {
+        width:100%;
+        top:0;
+        left:0;
+        position:absolute;
+        overflow:visible !important;
+        z-index:9998;
+        background-color:transparent;
+        box-shadow:none;
+        -webkit-box-shadow:none;
+        -moz-box-shadow:none;
+        -o-box-shadow:none;
+        border-bottom:1px solid rgba(255,255,255,0.25) !important;
+    }
+
+    .boxed-mode .banner[data-transparent-header="true"] {
+        left:0; right:0; margin:0 auto;
+    }
+
+    .banner[data-transparent-header="true"] #logo .logo-trans {display:inline}
+    .banner[data-transparent-header="true"] #logo .logo-main {display:none}
+
+    .banner[data-transparent-header="true"] .navbar-nav > li > a,
+    .banner[data-transparent-header="true"] .navbar-nav > li.active > a {color:#fff}
+    .banner[data-transparent-header="true"] .navbar-nav > li > a:hover,
+    .banner[data-transparent-header="true"] .navbar-nav > li.active > a:hover {color:#fff}
+
+    .banner[data-transparent-header="true"] .navbar-nav > li > a:hover:after,
+    .banner[data-transparent-header="true"] .navbar-nav > li.active > a:after,
+    .banner[data-transparent-header="true"] .navbar-nav > li.active > a:hover:after,
+    .banner[data-transparent-header="true"] .navbar-nav > li.active > a:focus:after {background-color:#fff}
+
+    .menu-seperator {
+        .p_14_r;
+    }
+
+    .menu-login a { padding-right: 4px; }
+    .menu-signup a { padding-left: 4px; }
+
+}

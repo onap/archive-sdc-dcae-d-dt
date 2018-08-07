@@ -1,0 +1,34 @@
+.tmp/*
+.tmp_imploded/*
+bower_components/*
+app/bower_components/*
+node_modules/*
+dist/*
+.tmp_imploded/fonts/glyphicons-halflings-regular.svg
+app/app.env.js
+.project
+.idea/*
+.vscode/
+target/*
+.settings*
+.classpath
+/*.war
+/node/*
+/src/main/webapp/comp-fe/*
+/src/main/webapp/*.png
+/src/main/webapp/*
+!/src/main/webapp/META-INF/MANIFAST.MF
+!/src/main/webapp/WEB-INF/config/dcae-fe/*
+*.iml
+
+# intelij idea IDE
+*.iml
+
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+/target/

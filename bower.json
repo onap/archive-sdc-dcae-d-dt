@@ -1,0 +1,24 @@
+{
+  "name": "dcaeapp",
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery": "2.2.4",
+    "angular": "1.4.0",
+    "bootstrap": "3.3.4",
+    "angular-ui-router": "0.3.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.4.0"
+  },
+  "appPath": "app",
+  "moduleName": "dcaeApp",
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  }
+}

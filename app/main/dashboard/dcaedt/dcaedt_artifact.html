@@ -1,0 +1,18 @@
+ <div class="dcae-main-container">
+	<div class="dcae-left-sidebar" >
+        <div class="dcae-menu-item" ng-class="{selected:page==='general'}" ui-sref="dcae.app.home">Home</div>
+        <div class="dcae-menu-item" ng-class="{selected:page==='general'}" ng-click="goGeneral(component, false)">General</div>
+	    <div class="dcae-menu-item" ng-class="{selected:page==='import'}" ng-click="goImport(component, false)">Import</div>
+        <div class="dcae-menu-item" ng-class="{selected:page==='composition'}" ng-click="goComposition()" data-tests-id="dcae-menu-item-Composition">Composition</div>
+        <div class="dcae-menu-item selected" ng-class="{selected:page==='artifact'}" ng-click="goArtifact()">Artifact</div>
+	</div>
+	
+	<div class="dcae-main-right-container">
+		<ul class="navigation-top-menu">
+		    <li><a ui-sref="dcae.app.home">Home</a></li>
+		    <li><a ui-sref="dcae.app.general">General</a></li>
+		    <li><a ui-sref="dcae.app.artifact">Artifact</a></li>
+		</ul>
+		<h1>This is Artifact</h1>
+	</div>
+</div>

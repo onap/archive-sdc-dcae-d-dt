@@ -1,0 +1,7 @@
+Exception: STATUS_ACCESS_VIOLATION at eip=016E74AC
+eax=00000001 ebx=016E74AC ecx=FFFD7000 edx=641DB5B4 esi=0255CE64 edi=0255CDC4
+ebp=00000000 esp=0255CD6C program=\\?\C:\Program Files\nodejs\node.exe, pid 8896, thread unknown (0x21F8)
+cs=0023 ds=002B es=002B fs=0053 gs=002B ss=002B
+Stack trace:
+Frame     Function  Args
+End of stack trace

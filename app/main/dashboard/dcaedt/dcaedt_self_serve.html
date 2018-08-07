@@ -1,0 +1,74 @@
+<div class="dcae-main-container">
+    <div class="dcae-left-sidebar">
+        <div class="dcae-menu-item selected"
+             ng-class="{selected:page==='general'}"
+             ng-click="goGeneral(component, false)">General
+        </div>
+        
+    </div>
+
+    <div class="dcae-main-right-container">
+
+        <div class="dcae-main-container-body-content ng-scope"
+             data-ng-class="{'third-party':thirdParty}" data-ui-view="">
+
+            <div include-padding="true"
+                 class="sdc-workspace-general-step ng-scope">
+
+                <form novalidate=""
+                      class="w-sdc-form ng-pristine ng-valid-name-exist ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength"
+                      name="editForm">
+
+                    <div class="w-sdc-form-section-container">
+
+
+                        <div class="w-sdc-form-columns-wrapper">
+
+                            <div class="w-sdc-form-column">
+
+                                <!--------------------- NAME -------------------->
+                                <div class="i-sdc-form-item">
+                                    <label class="i-sdc-form-label required">Service</label>
+                                    <select class="i-sdc-form-select">
+                                        <option id="XXX">XXX</option>
+                                        <option id="YYY">YYY</option>
+                                        <option id="ZZZ">ZZZ</option>
+                                    </select>
+                                </div>
+
+                                <div class="i-sdc-form-item">
+                                    <label class="i-sdc-form-label required">VNFi</label>
+                                    <select class="i-sdc-form-select">
+                                        <option id="XXX">XXX</option>
+                                        <option id="YYY">YYY</option>
+                                        <option id="ZZZ">ZZZ</option>
+                                    </select>
+                                </div>
+                                <div class="i-sdc-form-item">
+                                    <label class="i-sdc-form-label required">Location</label>
+                                    <select class="i-sdc-form-select">
+                                        <option id="XXX">XXX</option>
+                                        <option id="YYY">YYY</option>
+                                        <option id="ZZZ">ZZZ</option>
+                                    </select>
+                                </div>
+                                <div class="i-sdc-form-item">
+                                    <label class="i-sdc-form-label required">Upload Blue Print</label>
+                                </div>
+                                <input type="file" id="file" name="file"/>
+                                <button class="tlv-btn outline green" ng-click="add()">Add</button>
+                                <p>{{data}}</p>
+                                <button ng-show="createMode" ng-click="save()"
+                                        class="tlv-btn outline green ng-scope">Create
+                                </button>
+
+                                {{PostDataResponse}}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,202 @@
+<meta http-equiv="cache-control" content="no-cache" />
+<div class="dcae-main-container">
+    <div class="dcae-left-sidebar" left-menu></div>
+    
+    <div class="dcae-main-right-container">
+
+        <div class="sdc-workspace-top-bar-buttons" style="display: flex; justify-content: flex-end; border-bottom: 1px solid #cdcdcd; padding: 9px 0;">
+            <button class="tlv-btn blue" ng-if="!component.uuid" ng-disabled="$parent.editForm.$valid == false" ng-click="save()" style="margin-right: 10px;"
+                data-tests-id="Save-General">
+                save
+            </button>
+            <button class="tlv-btn outline blue" ng-click="goToBreadcrumbHome()" data-tests-id="Cancel-General">
+                cancel
+            </button>
+        </div>
+
+        <!-- <div class="dcae-workspace-top-bar">
+            <div ng-hide="createMode" class="version-container ">
+                <span class="lifecycle-state-text ng-binding ng-scope" data-tests-id="formlifecyclestate">V{{component.version}}</span>
+            </div>
+
+            <div ng-hide="createMode" class="lifecycle-state">
+                <div data-ng-hide="showLifecycleIcon()" class="lifecycle-state-icon" data-ng-class="{'in-design-status-icon': createMode, '': !createMode}"></div>
+                <span class="lifecycle-state-text ng-binding ng-scope" data-tests-id="formlifecyclestate">{{component.lifecycleState}}</span>
+            </div>
+
+
+            <div ng-if="!createMode" class="progress-container">
+                <div class="general-view-top-progress top-progress ng-isolate-scope" progress-value="progressService.getProgressValue(component.uniqueId)"
+                    progress-message="progressMessage"></div>
+            </div>
+
+            <div class="sdc-workspace-top-bar-buttons">
+
+                <span data-ng-if="isDesigner()" data-ng-class="{'disabled' :isDisableMode() || isViewMode()}" ng-click="revert()" class="dcae-sprite-new revert-btn ng-scope disabled"
+                    data-tests-id="revert" data-ng-show="showFullIcons()" sdc-smart-tooltip="" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Revert</span>
+                <span class="delimiter"></span> <span class="dcae-sprite-new x-btn" data-ng-click="goToBreadcrumbHome()"
+                    sdc-smart-tooltip="" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Close</span>
+
+            </div>
+
+
+        </div>  -->
+        <div class="tlv-loader large" ng-if="loader"></div>
+
+        <div class="dcae-asset-creation-info" ng-if="component.uuid">
+            <div>
+                <b>UUID:</b>&nbsp;{{component.uuid}}
+                <b style="padding-left: 15px;">&nbsp;Invariant UUID:</b>&nbsp; {{component.invariantUUID}}
+            </div>
+            <div>
+                <b>last updater:</b>
+                {{component.lastUpdaterUserId}}
+                <b style="padding-left: 15px;">lifecycle state:</b>
+                {{component.lifecycleState}}
+            </div>
+        </div>
+
+        <div include-padding="true" class="sdc-workspace-general-step ng-scope">
+
+            <form novalidate="" class="w-sdc-form ng-pristine ng-valid-name-exist ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength"
+                name="editForm">
+
+                <div class="w-sdc-form-section-container">
+
+                    <div class="i-sdc-form-item">
+                        <div class="general-view-top-progress top-progress ng-isolate-scope" progress-value="progressValue" progress-message="progressMessage">
+
+                            <!--======================= Top progress var =======================-->
+                            <!-- ngIf: progressValue>0 && progressValue<100 -->
+
+                            <!-- ngIf: progressValue===100 -->
+
+                            <!-- ngIf: progressValue===-1 -->
+                            <!--======================= Top progress var =======================-->
+
+                        </div>
+                    </div>
+
+
+                    <div class="w-sdc-form-columns-wrapper">
+
+                        <div class="w-sdc-form-column">
+
+                            <!--------------------- NAME -------------------->
+                            <div class="i-sdc-form-item" data-ng-class="{'error': validateField(editForm.componentName)}">
+                                <label class="i-sdc-form-label required">Name</label>
+                                <input type="text" class="i-sdc-form-input dcae-input-text" ng-readonly="component.uuid" data-ng-class="{'view-mode': isViewMode()}"
+                                    name="componentName" data-ng-init="isCreateMode() &amp;&amp; validateName(true)" data-ng-model="component.name"
+                                    data-ng-disabled="component.isAlreadyCertified()" data-tests-id="name" autofocus="" placeholder="Name"
+                                    ng-readonly="isViewMode()" data-ng-maxlength="50" maxlength="50" data-ng-minlength="0" minlength="0"
+                                    data-required="" data-ng-model-options="{ debounce: 500 }" data-ng-pattern="/^[\s\w\&amp;_.:-]{1,1024}$/">
+                                <!--<input
+                                class="i-sdc-form-input ng-pristine ng-valid-name-exist ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength ng-touched"
+                                data-ng-class="{'view-mode': isViewMode()}"
+                                name="componentName"
+                                data-ng-init="isCreateMode() &amp;&amp; validateName(true)"
+                                data-ng-maxlength="50" maxlength="50" data-ng-minlength="0"
+                                minlength="0" data-ng-model="component.name" type="text"
+                                data-required="" data-ng-model-options="{ debounce: 500 }"
+                                data-ng-pattern="/^[\s\w\&amp;_.:-]{1,1024}$/"
+                                data-ng-disabled="component.isAlreadyCertified()"
+                                data-tests-id="name" autofocus="" ng-readonly="isViewMode()">-->
+
+                                <div class="input-error ng-hide" data-ng-show="validateField(editForm.componentName)">
+                                    <span ng-show="editForm.componentName.$error.required" translate="NEW_SERVICE_RESOURCE_ERROR_RESOURCE_NAME_REQUIRED" class="ng-scope">
+                                        Name is required.
+                                    </span>
+                                    <span ng-show="editForm.componentName.$error.maxlength" translate="VALIDATION_ERROR_MAX_LENGTH" translate-values="{'max': '50' }"
+                                        class="ng-scope ng-hide">
+                                        Max length 50 characters.
+                                    </span>
+                                    <span ng-show="editForm.componentName.$error.minlength" translate="VALIDATION_ERROR_MIN_LENGTH" translate-values="{'min': '4' }"
+                                        class="ng-scope ng-hide">Min length 4 characters.</span>
+                                    <span ng-show="editForm.componentName.$error.nameExist" translate="NEW_SERVICE_RESOURCE_ERROR_NAME_EXISTS" class="ng-scope ng-hide">Name already exists.</span>
+                                    <span ng-show="editForm.componentName.$error.pattern" translate="VALIDATION_ERROR_SPECIAL_CHARS_NOT_ALLOWED" class="ng-scope ng-hide">Special characters not allowed.
+                                    </span>
+                                </div>
+                            </div>
+                            <!--------------------- NAME -------------------->
+
+                            <!--------------------- FULL NAME -------------------->
+                            <!-- ngIf: component.isProduct() -->
+                            <!--------------------- NAME -------------------->
+
+                            <!--------------------- DESCRIPTION -------------------->
+                            <div class="i-sdc-form-item" data-ng-class="{'error': validateField(editForm.description)}">
+                                <label class="i-sdc-form-label required">Description</label>
+                                <textarea class="description dcae-input-text" ng-readonly="component.uuid" name="description" data-ng-class="{'view-mode': isViewMode()}"
+                                    data-ng-maxlength="1024" placeholder="Description" data-required="" data-ng-model="component.description"
+                                    data-ng-model-options="{ debounce: 500 }" data-ng-pattern="/^[\u0000-\u00BF]*$/" maxlength="1024"
+                                    data-tests-id="description"></textarea>
+                                <!-- placeholder="Description here..." -->
+
+                                <div class="input-error" ng-if="editForm.description.$dirty">
+                                    <span ng-if="editForm.description.$error.required" translate="NEW_SERVICE_RESOURCE_ERROR_RESOURCE_DESCRIPTION_REQUIRED" class="ng-scope">Description is required.</span>
+                                    <span ng-if="editForm.description.$error.maxlength" translate="VALIDATION_ERROR_MAX_LENGTH" translate-values="{'max': '1024' }"
+                                        class="ng-scope ng-hide">Max length 1024 characters.</span>
+                                    <span ng-if="editForm.description.$error.pattern" translate="VALIDATION_ERROR_SPECIAL_CHARS_NOT_ALLOWED">Special characters not allowed.
+                                    </span>
+                                </div>
+                            </div>
+                            <!--------------------- DESCRIPTION -------------------->
+
+                            <!--------------------- CATEGORIES -------------------->
+                            <!-- ngIf: !component.isProduct() -->
+                            <!-- end ngIf: !component.isProduct() -->
+                            <!--------------------- CATEGORIES -------------------->
+                            <br>
+                            <!-- <button ng-if="!component.uuid" ng-disabled="!createMode" ng-click="save()" class="tlv-btn outline green ng-scope">Create
+                            </button> -->
+
+                            <!--{{PostDataResponse}}-->
+
+                            {{resultInformation}}
+
+                        </div>
+                        <!-- Close w-sdc-form-column -->
+
+                    </div>
+
+                </div>
+                <!-- Close w-sdc-form-section-container -->
+
+            </form>
+
+        </div>
+
+        <!-- <div ng-hide="typeFlag" class="dcae-main-container-body-content ng-scope" data-ng-class="{'third-party':thirdParty}" data-ui-view="">
+            <div class="row">
+                <div class="col-sm-4">
+                    <select class="form-control" ng-model="service.uuid" ng-change="VNFIs(service.uuid)" data-ng-options="service.uuid as service.name for service in services">
+                        <option value="">Select Service</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-4">
+                    <select class="form-control" ng-model="vnfi.name" ng-change="" data-ng-options="vnfi.name as vnfi.name for vnfi in vnfis">
+                        <option value="">Select VNFI</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="btn">
+                        <button class="btn btn-default" type="button" ng-click="saveServiceSelection(component,service,vnfi)">Save Service Selection
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {{resultInformation2}}
+
+        </div> -->
+
+
+    </div>
+</div>

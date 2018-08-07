@@ -1,0 +1,61 @@
+<div class="dcae-main-container">
+    <div class="dcae-left-sidebar">
+        <div class="dcae-menu-item" ng-class="{selected:page==='general'}" ui-sref="dcae.app.home">Home</div>
+        <div class="dcae-menu-item" ng-class="{selected:page==='general'}" ng-click="goGeneral(component, component==null)">General
+        </div>
+        <div class="dcae-menu-item selected" ng-class="{selected:page==='import'}" ng-click="goImport(component, component==null)">Import
+        </div>
+        <div class="dcae-menu-item" ng-class="{selected:page==='composition'}" ng-click="goComposition(component, typeFlag)" data-tests-id="dcae-menu-item-Composition">
+            Composition
+        </div>
+        <!--<div class="dcae-menu-item" ng-class="{selected:page==='artifact'}" ng-click="goArtifact()">Artifact</div>-->
+    </div>
+
+    <div class="dcae-main-right-container">
+
+        <div style="display: flex; justify-content: space-between; padding-bottom:0;">
+            <span>{{ VNFs.length }} VFCMTS </span>
+            <div>
+                <input type='text' ng-model='searchVfc' placeholder="Search" style="border-radius: 2px;width: 245px;height: 32px;line-height: 32px;border: 1px solid #d2d2d2;outline: none;text-indent: 10px; background: white;"
+                />
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <footer>Version: {{ appSettings.version }}</footer>
+
+
+        <div data-ng-class="{'sdc-hide-popover': hidePopover}" data-ng-init="componentx.filterTerm = componentx.name +  ' '  + componentx.description + ' ' + componentx.tags.toString() + ' ' + componentx.version"
+            class="dcae-dashboard-card ng-scope" data-ng-repeat="componentx in VNFs |filter:showTypeFilter |filter:searchVfc"
+            data-ng-class="{'resource' : componentx.resourceType === 'VFC', 'service' : componentx.isService(), 'product' : componentx.isProduct()}">
+
+
+            <div class="dcae-dashboard-card-body" data-ng-click="gui.isLoading || clone(componentx,component)">
+                <div class="dcae-dashboard-card-avatar">
+                    <span data-tests-id="asset-type" class="{{componentx.resourceType}}"></span>
+                </div>
+                <div class="dcae-dashboard-card-edit " data-ng-class="componentx.lifecycleState" data-tests-id="assetlifecycleState {{getStatus()}}"></div>
+                <div class="dcae-dashboard-card-schema-image sprite-resource-icons defaulticon" style="background-image: url(dcae/79291b5162b83fdab4bc9c42d2a6f4db.png);display: inline-block;"
+                    data-tests-id="{{componentx.categories[0].subcategories[0].uniqueId}}"></div>
+                <!--<div class="dcae-dashboard-card-schema-image {{componentx.icon}}" data-tests-id="{{componentx.categories[0].subcategories[0].uniqueId}}"
+                    data-ng-class="{'sprite-resource-icons':componentx.componentType === 'RESOURCE', 'sprite-services-icons':componentx.componentType === 'SERVICE', 'sprite-product-icons':componentx.componentType === 'PRODUCT'}"></div>-->
+                <div class="dcae-dashboard-card-description">{{componentx.description}}</div>
+                <div class="dcae-dashboard-card-info-name-container">
+                    <span class="dcae-dashboard-card-info-name" tooltips tooltip-content="{{componentx.name}}"> {{componentx.name}}</span>
+                </div>
+            </div>
+
+            <div class="dcae-dashboard-card-footer">
+                <div class="dcae-dashboard-card-info">
+                    <div class="dcae-dashboard-card-info-lifecycleState">
+                        <span class="dcae-dashboard-card-info-lifecycleState">
+							{{componentx.getStatus(sdcMenu)}}</span>
+                    </div>
+                    <div class="dcae-dashboard-card-info-user">V {{componentx.version}}
+                    </div>
+                </div>
+                <!--<div class="dcae-dashboard-card-info-lifecycleState-icon sprite-new {{sdcMenu.LifeCycleStatuses[componentx.lifecycleState].icon}}"></div>-->
+            </div>
+        </div>
+    </div>
+</div>
