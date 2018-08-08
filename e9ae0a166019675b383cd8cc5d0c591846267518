@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a76adc5_3dca1850",
+        "filename": "Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 69
+      },
+      "writtenOn": "2018-08-08T08:58:15Z",
+      "side": 1,
+      "message": "dont you need the docker file to create dockers?",
+      "revId": "e9ae0a166019675b383cd8cc5d0c591846267518",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
