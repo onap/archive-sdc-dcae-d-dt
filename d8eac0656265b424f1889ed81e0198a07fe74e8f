@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a76adc5_b9b94eeb",
+        "filename": "pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 69
+      },
+      "writtenOn": "2018-08-12T14:46:39Z",
+      "side": 1,
+      "message": "please remove the commented out code",
+      "range": {
+        "startLine": 441,
+        "startChar": 0,
+        "endLine": 444,
+        "endChar": 80
+      },
+      "revId": "d8eac0656265b424f1889ed81e0198a07fe74e8f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
