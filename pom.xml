@@ -27,6 +27,7 @@
         <staging.profile.id>176c31dfe190a</staging.profile.id>
         <sitePath>/content/sites/site/org/openecomp/sdc/${project.version}</sitePath>
         <sonar.branch>${project.version}</sonar.branch>
+        <sonar.coverage.exclusions>**</sonar.coverage.exclusions>
     </properties>
     <dependencies>
         <dependency>
@@ -369,7 +370,7 @@
                     </webResources>
                     <archive>
                         <manifest>
-                            <mainClass>org.openecomp.sdc.dcae.FeApp</mainClass>
+                            <mainClass>org.onap.sdc.dcae.FeApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -437,9 +438,4 @@
             <url>dav:${nexus.proxy}${sitePath}</url>
         </site>
     </distributionManagement>
-    <!-- <build> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-war-plugin</artifactId> <version>3.0.0</version> <configuration>
-		<webResources> <resource> <directory>dist/imploded</directory> <targetPath>/</targetPath>
-		</resource> </webResources> </configuration> </plugin> </plugins> </build> -->
-
 </project>
