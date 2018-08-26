@@ -208,8 +208,10 @@
                             <apiVersion>1.23</apiVersion>
                             <registry>${docker.registry}</registry>
                             <authConfig>
-                                <username>${docker.username}</username>
-                                <password>${docker.password}</password>
+                                <pull>
+                                    <username>${docker.username}</username>
+                                    <password>${docker.password}</password>
+                                </pull>
                             </authConfig>
                             <images>
                                 <!-- Build backend image -->
