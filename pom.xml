@@ -18,8 +18,6 @@
 
     <properties>
         <maven.build.timestamp.format>yyyyMMdd'T'HHmm</maven.build.timestamp.format>
-        <docker.tag>${project.version}-${maven.build.timestamp}</docker.tag>
-        <docker.latest.tag>${project.version}-latest</docker.latest.tag>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -195,6 +193,9 @@
                 <docker.username>docker</docker.username>
                 <docker.password>docker</docker.password>
                 <docker.namespace>onap</docker.namespace>
+                <docker.tag>${project.version}-${maven.build.timestamp}</docker.tag>
+                <docker.latest.tag>${project.version}-latest</docker.latest.tag>
+                <docker.staging.tag>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}-STAGING-latest</docker.staging.tag>
             </properties>
             <build>
                 <plugins>
