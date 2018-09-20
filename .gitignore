@@ -1,7 +1,6 @@
 .tmp/*
 .tmp_imploded/*
 bower_components/*
-app/bower_components/*
 node_modules/*
 dist/*
 .tmp_imploded/fonts/glyphicons-halflings-regular.svg
