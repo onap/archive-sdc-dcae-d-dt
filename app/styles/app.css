@@ -21422,6 +21422,18 @@
   width: 16px;
   height: 20px;
 }
+#dcaedt button:disabled,
+#dcaedt input:disabled,
+#dcaedt select:disabled,
+#dcaedt textarea:disabled {
+  cursor: not-allowed !important;
+  background: #c0c0c0 !important;
+}
+#dcaedt input[readonly],
+#dcaedt textarea[readonly] {
+  cursor: not-allowed !important;
+  background: #c0c0c0 !important;
+}
 #dcaedt .sprite-resource-icons {
   background-image: url('images/sprites/sprite-resource-icons.png');
   display: inline-block;

@@ -8,24 +8,30 @@
         $scope.appSettings = appSettings;
 
         function init() {
-            if ($rootScope.VNFs === undefined) {
-                dcaeFactory
-                    .getVNFList()
-                    .then(function (response) {
-                        $rootScope.VNFs = response.data;
-                        $rootScope.VNFsRef = $rootScope.VNFs;
-                        $scope.title = appSettings.title;
-                        //var vm = this; vm.test = appSettings.title;
-                    }, function (res, status, headers, config) {
-                        errorHanlder(res);
-                        $rootScope.VNFs = [];
-                    });
-            }
+            $rootScope.loader = true;
+            $rootScope.VNFs = [];
+            dcaeFactory
+                .getVNFList()
+                .then(function (response) {
+                    $rootScope.VNFs = response.data;
+                    $rootScope.VNFsRef = $rootScope.VNFs;
+                    $scope.title = appSettings.title;
+                    $rootScope.loader = false;
+                    //var vm = this; vm.test = appSettings.title;
+                }, function (res, status, headers, config) {
+                    errorHanlder(res);
+                    $rootScope.VNFs = [];
+                    $rootScope.loader = false;
+                });
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
         }
 
-        init();
+        if ($state.current.url !== '/general') {
+            $rootScope.loader = false;
+            console.log($state.loader);
+            init();
+        }
 
         $scope.sortingVfcmts = function () {
             $rootScope.VNFs = $rootScope.VNFsRef;

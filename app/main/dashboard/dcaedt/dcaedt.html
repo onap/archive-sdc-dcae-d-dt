@@ -3,6 +3,8 @@
 
     <div class="dcae-main-container" style="padding: 1rem;">
 
+        <div class="tlv-loader large" ng-if="loader"></div>
+
         <div style="display: flex; justify-content: space-between; margin:10px 0;">
             <span style="padding-left: 10px; display: flex; align-items: center;">
                 <span ng-if="!VNFs" style="padding-right:3px;">0</span> {{ VNFs.length }} VFCMTS
