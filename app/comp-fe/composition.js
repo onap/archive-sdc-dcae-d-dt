@@ -55,6 +55,7 @@ var CompositionEditor = function () {
 
     var flowTypes = window.flowTypes;
     var typeSelect = document.getElementById("selected-type-mt");
+    var self = this;
 
     if (flowTypes.length > 0) {
         flowTypes
@@ -207,6 +208,20 @@ var CompositionEditor = function () {
         console.error("unable to get composition: %o", error);
     }
 
+    function deletebutton() {
+        d3.select("#compositiondiv")
+            .append("div")
+            .style("position", "absolute")
+            .style("bottom", "30px")
+            .style("right", "5px")
+            .style("background", "rgba(255,0,0,0.3)")
+            .html("toggle node deletion")
+            .on("click", () => {
+                d3.selectAll(".deletenode").style("visibility",  d3.selectAll(".deletenode")
+                    .style("visibility") === "hidden" ? "visible" : "hidden");
+            });
+    }
+
     function init(cid) {
         log("init");
         cid = cid || uuid();
@@ -232,26 +247,7 @@ var CompositionEditor = function () {
             .fail(getCompositionError);
 
         deletebutton();
-    }
-
-    function deletebutton() {
-        d3
-            .select("#compositiondiv")
-            .append("div")
-            .style("position", "absolute")
-            .style("bottom", "30px")
-            .style("right", "5px")
-            .style("background", "rgba(255,0,0,0.3)")
-            .html("toggle node deletion")
-            .on("click", function (d) {
-                if (d3.selectAll(".deletenode").style("visibility") == "hidden")
-                    d3.selectAll(".deletenode").style("visibility", "visible");
-                else
-                    d3
-                        .selectAll(".deletenode")
-                        .style("visibility", "hidden");
-                }
-            );
+        initDeleteEvent();
     }
 
     function getcdump(cid) {
@@ -930,9 +926,7 @@ var CompositionEditor = function () {
         model.nid = ndata.name;
 
         var node = _.extend({}, model, {ndata: ndata});
-        curcomp
-            .nodes
-            .push(deepclone(node));
+        curcomp.nodes.push(deepclone(node));
 
         if (!hasdata) {
             /*xhrpost("/composition.addnode?cid="+cid, node,
@@ -947,19 +941,16 @@ var CompositionEditor = function () {
         }
         ndata.model = model;
 
-        force
-            .nodes()
-            .push(ndata);
+        force.nodes().push(ndata);
+
         var nodes = force.nodes();
 
-        var gnode = graph
-            .selectAll(".node")
+        var gnode = graph.selectAll(".node")
             .data(nodes, function (d) {
                 return d.name;
             });
 
-        var n = gnode
-            .enter()
+        var n = gnode.enter()
             .append("g")
             .attr("id", model.nid.replace(/\W/g, "_"))
             // this must come first, because ?? .attr("class", "node draggable")
@@ -973,26 +964,24 @@ var CompositionEditor = function () {
                 if (!d.y || isNaN(d.y))
                     d.y = bh / 2 + rand(100);
                 return "translate(" + d.x + "," + d.y + ")";
-            })
-            .on("click", function (d) {
-                if (d3.event.metaKey || d3.event.ctrlKey)
-                    removenode(d);
-                }
-            );
+            });
 
         rendernode(n);
 
+        n.on("mouseover", (d) => {
+            self.selectedElement = d;
+        });
+
+        n.on("mouseout", () => {
+            self.selectedElement = null;
+        });
+
         n.call(force.drag().on("dragstart", function (d) {
-            d3
-                .select(this)
-                .classed("fixed", d.fixed = true);
+            d3.select(this).classed("fixed", d.fixed = true);
         }));
 
         function rti(n, name) {
-            return n
-                .typeinfo
-                .requirements
-                .find(function (tr) {
+            return n.typeinfo.requirements.find(function (tr) {
                     return tr.name === r.name;
                 })
         }
@@ -1002,14 +991,11 @@ var CompositionEditor = function () {
 
         if (model.requirements) {
             model.requirements = dedup(model.requirements);
-            model
-                .requirements
+            model.requirements
                 .forEach(function (x) {
-                    if (x.name == "host") // CCD hack
+                    if (x.name === "host") // CCD hack
                         return;
-                    ndata
-                        .ports
-                        .push({
+                    ndata.ports.push({
                             name: x.name,
                             parent: ndata,
                             ptype: "req",
@@ -1018,14 +1004,12 @@ var CompositionEditor = function () {
                         });
                 });
 
-            model
-                .requirements
-                .forEach(function (r) {
+            model.requirements.forEach(function (r) {
                     r.ti = model
                         .typeinfo
                         .requirements
                         .find(function (tr) {
-                            return tr.name == r.name;
+                            return tr.name === r.name;
                         });
                 });
         }
@@ -1033,19 +1017,16 @@ var CompositionEditor = function () {
         // requirements/capabilities)
         if (model.typeinfo.requirements) {
             model.typeinfo.requirements = dedup(model.typeinfo.requirements);
-            model
-                .typeinfo
-                .requirements
-                .forEach(function (x) {
+            model.typeinfo.requirements.forEach(function (x) {
                     var port = ndata
                         .ports
                         .find(function (y) {
-                            return y.name == x.name && y.ptype == "req";
+                            return y.name === x.name && y.ptype === "req";
                         });
                     if (port)
                         port.portinfo = _.extend(_.clone(x), port.portinfo); // this should never happen
                     else {
-                        if (x.name == "host") // CCD hack
+                        if (x.name === "host") // CCD hack
                             return;
                         log("UNEXPECTED TYPEINFO", x.name);
                     }
@@ -1054,9 +1035,7 @@ var CompositionEditor = function () {
 
         if (model.capabilities) {
             model.capabilities = dedup(model.capabilities);
-            model
-                .capabilities
-                .forEach(function (x) {
+            model.capabilities.forEach(function (x) {
                     ndata
                         .ports
                         .push({
@@ -1068,9 +1047,7 @@ var CompositionEditor = function () {
                         });
                 });
 
-            model
-                .capabilities
-                .forEach(function (c) {
+            model.capabilities.forEach(function (c) {
                     c.ti = model
                         .typeinfo
                         .capabilities
@@ -1089,7 +1066,7 @@ var CompositionEditor = function () {
                     var port = ndata
                         .ports
                         .find(function (y) {
-                            return y.name == x.name && y.ptype == "cap";
+                            return y.name === x.name && y.ptype === "cap";
                         });
                     if (port)
                         port.portinfo = _.extend(_.clone(x), port.portinfo); // this should never happen
@@ -1603,7 +1580,7 @@ var CompositionEditor = function () {
         curcomp.nodes = curcomp
             .nodes
             .filter(function (n) {
-                return n.nid != d.name;
+                return n.nid !== d.name;
             });
 
         console.log("before: ", curcomp.nodes);
@@ -1624,9 +1601,8 @@ var CompositionEditor = function () {
                 }
             );
         nodes = _.without(force.nodes(), d);
-        graph
-            .selectAll(".node")
-            .data(nodes, function (d) {
+
+        graph.selectAll(".node").data(nodes, function (d) {
                 return d.name;
             })
             .exit()
@@ -1899,7 +1875,7 @@ var CompositionEditor = function () {
          }
          */
 
-        var link = {
+        let link = {
             name: gensym("lnk"),
             source: n1,
             target: n2,
@@ -1913,36 +1889,34 @@ var CompositionEditor = function () {
 
         links.push(link);
 
-        var ln = edgegroup
-            .selectAll(".relation")
+        let ln = edgegroup.selectAll(".relation")
             .data(links, function (d) {
                 return d.name;
             });
-        ln
-            .enter()
+
+        ln.enter()
             .insert("svg:path")
             .classed("relation", true)
             .classed("pending", true)
             .attr("d", epath)
-            .on("click", function (d) {
-                if (d3.event.metaKey || d3.event.ctrlKey)
-                    removelink(d);
-                }
-            );
-        ln
-            .exit()
-            .remove();
+            .on("mouseover", (d) => {
+                self.selectedElement = d;
+            })
+            .on("mouseout", () => {
+                self.selectedElement = null;
+            });
+
+        ln.exit().remove();
 
         setTimeout(function () {
-            edgegroup
-                .selectAll(".pending")
+            edgegroup.selectAll(".pending")
                 .classed("pending", false)
                 .each(function (d) {
                     d.pending = false;
                 });
         }, 1000);
 
-        var meta = {
+        let meta = {
             n1: n1.name,
             n2: n2.name,
             p1: p1,
@@ -1950,18 +1924,16 @@ var CompositionEditor = function () {
         };
 
         function findrelationship(n, p) {
-            var r = n.typeinfo.requirements && n
-                .typeinfo
-                .requirements
+            let r = n.typeinfo.requirements && n.typeinfo.requirements
                 .find(function (x) {
-                    return x.name == p;
+                    return x.name === p;
                 });
             return r && r.relationship && [n.name, r.relationship.name, r.name];
         }
 
         meta.relationship = findrelationship(n1.model, p1) || findrelationship(n2.model, p2);
 
-        var relation = {
+        let relation = {
             rid: link.name,
             n1: n1.name,
             name1: n1.model.name,
@@ -1969,11 +1941,10 @@ var CompositionEditor = function () {
             name2: n2.model.name,
             meta: meta
         };
-        curcomp
-            .relations
-            .push(deepclone(relation));
 
-        if (!restoring) {
+        curcomp.relations.push(deepclone(relation));
+
+        // if (!restoring) {
             /*xhrpost("/composition.addrelation?cid="+cid, relation,
              function(resp) {
              });
@@ -1982,7 +1953,7 @@ var CompositionEditor = function () {
              function(resp) {
              });*/
 
-        }
+        // }
 
         force.start();
 
@@ -2742,6 +2713,27 @@ var CompositionEditor = function () {
             });
     }
 
+    function initDeleteEvent(){
+        self.selectedElement = null;
+        d3.select("body").on("keydown", function () {
+            if (d3.event.code === "Delete") {
+                if (self.selectedElement !== null) {
+                    let name = self.selectedElement.name.split(".");
+                    if (name.length > 0) {
+                        if (name[0] === "n") {
+                            removenode(self.selectedElement)
+                        } else if (name[0] === "lnk") {
+                            removelink(self.selectedElement)
+                        }
+                    }
+                    self.selectedElement = null;
+                } else {
+                    notifyError('No item selected', 'errorMsg');
+                }
+            }
+        });
+    }
+
     var composition_version = {
         revision: "revision: 2568",
         lastmod: "last modified: Thu Sep 21 13:22:37 2017"
@@ -2972,18 +2964,26 @@ function attempt(maxAttempts, deferredFunc) {
  * @requires remarkable-bootstrap-notify
  */
 function notifySuccess(message, testId) {
-    var template = $('<span>')
+    notify(message, testId, 'success', 'glyphicon glyphicon-ok');
+}
+
+function notifyError(message, testId) {
+    notify(message, testId, 'danger', 'glyphicon glyphicon-remove');
+}
+
+function notify(message, testId, type, icon) {
+    let template = $('<span>')
         .attr('data-tests-id', testId)
         .text(message)
-        .prop('outerHTML') // stringify the element
+        .prop('outerHTML'); // stringify the element
 
     $.notify({
         // options
         message: template,
-        icon: 'glyphicon glyphicon-ok' // v icon
+        icon: icon
     }, {
         // settings
-        type: 'success',
+        type: type,
         delay: 5000, // auto-close after 5sec
         placement: {
             from: 'bottom'

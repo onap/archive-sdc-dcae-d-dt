@@ -106,15 +106,15 @@ svg {
 }
 
 .node {
-  //fill: rgba(190,190,190,0.8);
-  fill: #ccc;
-  //fill-opacity: .6;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-  stroke: rgba(0,0,0,0.2);
+    outline: none;
+    fill: #ccc;
+    fill-opacity: .6;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    stroke: rgba(0,0,0,0.2);
 }
 
 .node:hover {
-  stroke: rgba(0,0,0,0.5);
+    stroke: rgb(0, 159, 219);
 }
 .nodeport {
   //visibility:hidden;
@@ -123,26 +123,18 @@ svg {
   //fill-opacity: 1;
   //transform: scale(1);
 }
-.nodeport:hover {
-   //fill: #f00;
-}
 
 .nodeporttext {
-  transition: .5s;
-  text-anchor: middle;
-  //font: 12px Raleway;
-  //font: 12px helvetica;
-  font-size: 12px;
-  font-family:helvetica;
-  pointer-events: none;
-  //stroke: rgba(0,0,0,0.3);
-  fill: rgba(0,0,0,0.6);
-  text-color: rgba(0,0,0,0.6);
-  //stroke-opacity: 0.7;
-  //opacity: 0.8;
+    transition: .5s;
+    text-anchor: middle;
+    font-size: 12px;
+    font-family: helvetica, serif;
+    pointer-events: none;
+    fill: rgba(0,0,0,0.6);
 }
-.nodeporttext:hover {
-  font-size: 14px;
+.node:hover .nodeporttext{
+    font-size: 14px;
+    stroke: rgba(0,0,0,0.5);
 }
 
 .hidden {
@@ -179,7 +171,7 @@ svg {
   stroke-width: .5;
   visibility: visible;
   -webkit-animation: pulsate 1s ease-out 0s infinite alternate;
-  animation: pulsate 1s ease-out 0s infinite alternatedil;
+  animation: pulsate 1s ease-out 0s infinite alternate;
 }
 @keyframes pulsate {
     0% {transform: scale(0.9); opacity: 0.0;}
@@ -209,8 +201,8 @@ svg {
 .pendingquery {
   font-style: italic;
   margin-left: 20px;
-  -webkit-animation: pending 1s ease-out 0s infinite alternatedil;
-  animation: pending 1s ease-out 0s infinite alternatedil;
+  -webkit-animation: pending 1s ease-out 0s infinite alternate;
+  animation: pending 1s ease-out 0s infinite alternate;
 }
 @keyframes pending {
     0% { opacity: 1.0;}
@@ -234,7 +226,7 @@ svg {
   //transition: .5s;
 }
 .relation:hover {
-  stroke: #555;
+  stroke: rgb(0, 159, 219);
 }
 .pending {
   stroke-dasharray: 10,25;
