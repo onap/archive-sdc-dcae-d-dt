@@ -280,6 +280,8 @@
             $scope.loader = true;
             generalUserInput.name = this.component.name;
             generalUserInput.description = this.component.description;
+            generalUserInput.subcategory = "Base Monitoring Template";
+
             console.log(JSON.stringify(generalUserInput, null, 4));
             var config = {
                 headers: {
