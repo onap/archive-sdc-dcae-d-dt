@@ -7,7 +7,7 @@
         var factory = {};
 
         factory.getVNFList = function () {
-            return $http.get(window.host + 'getResourcesByCategory');
+            return $http.get(window.host + 'getResourcesByMonitoringTemplateCategory');
         };
 
         factory.postData = function (url, data, config) {
