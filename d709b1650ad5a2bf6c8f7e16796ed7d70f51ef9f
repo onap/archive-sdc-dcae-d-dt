@@ -46,6 +46,30 @@
       "revId": "d709b1650ad5a2bf6c8f7e16796ed7d70f51ef9f",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53faa8b7_0f127a79",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3949
+      },
+      "writtenOn": "2019-08-06T11:13:24Z",
+      "side": 1,
+      "message": "Still over 50 chars (doesn\u0027t the push message complain about it?) Maybe just say \"Add subcategory to the \"createVFCMT\" body\" and expand in the following lines if needed - also, the title should have no period at the end",
+      "parentUuid": "3e9c8347_0d56c24c",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 104
+      },
+      "revId": "d709b1650ad5a2bf6c8f7e16796ed7d70f51ef9f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
