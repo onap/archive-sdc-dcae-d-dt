@@ -1971,11 +1971,8 @@ var CompositionEditor = function () {
          function(resp) {
          });*/
 
-        curcomp.relations = curcomp
-            .relations
-            .filter(function (r) {
-                r.rid != d.name
-            });
+        curcomp.relations = curcomp.relations.filter(r => r.rid !== d.name);
+
         /*xhrpost("/composition.savecomp?cid="+cid, curcomp,
          function(resp) {
          });*/
