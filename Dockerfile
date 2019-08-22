@@ -1,25 +1,15 @@
-FROM onap/base_sdc-jetty:1.2.0-SNAPSHOT-latest
+FROM onap/base_sdc-jetty:1.4.1
 
-COPY docker/chef-solo /var/opt/dcae-dt/chef-solo/
+COPY docker/chef-solo /root/chef-solo/
 
-COPY docker/startup.sh /var/opt/dcae-dt/
+COPY docker/chef-repo/cookbooks /root/chef-solo/cookbooks/
 
-ADD target/dcae-dt.war ${JETTY_BASE}/webapps/
+ADD --chown=jetty:jetty target/dcae-dt.war ${JETTY_BASE}/webapps/
 
 USER root
 
-RUN mkdir -p /opt/logs/dcae-dt
+COPY docker/startup.sh /root/
 
-COPY docker/set_user.sh /tmp/set_user.sh
+RUN chmod 770 /root/startup.sh
 
-RUN sh -x /tmp/set_user.sh && rm -f /tmp/set_user.sh
-
-RUN chown -R jetty:jetty ${JETTY_BASE}/webapps  /var/opt/dcae-dt  /opt/logs  /var/lib/jetty
-
-RUN chmod 770 /var/opt/dcae-dt/startup.sh
-
-EXPOSE 8186 9446
-
-USER jetty
-
-ENTRYPOINT [ "/var/opt/dcae-dt/startup.sh" ]
+ENTRYPOINT [ "/root/startup.sh" ]

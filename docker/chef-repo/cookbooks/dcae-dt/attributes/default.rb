@@ -11,9 +11,9 @@ default['DCAE']['FE'][:https_port] = 9444
 default['DCAE']['DT'][:http_port] = 8186
 default['DCAE']['DT'][:https_port] = 9446
 
-default['jetty'][:keystore_pwd] = "OBF:1cp61iuj194s194u194w194y1is31cok"
-default['jetty'][:keymanager_pwd] = "OBF:1cp61iuj194s194u194w194y1is31cok"
-default['jetty'][:truststore_pwd] = "OBF:1cp61iuj194s194u194w194y1is31cok"
+default['jetty']['keystore_pwd'] = "rTIS;B4kM]2GHcNK2c3B4&Ng"
+default['jetty']['keymanager_pwd'] = "rTIS;B4kM]2GHcNK2c3B4&Ng"
+default['jetty']['truststore_pwd'] = "Y,f975ZNJfVZhV*{+Y[}pA?0"
 
 default['disableHttp'] = true
 
