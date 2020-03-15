@@ -1,15 +1,13 @@
-FROM onap/base_sdc-jetty:1.4.1
+FROM onap/base_sdc-jetty:1.6.0
 
-COPY docker/chef-solo /root/chef-solo/
+COPY --chown=jetty:jetty docker/chef-solo ${JETTY_BASE}/chef-solo/
 
-COPY docker/chef-repo/cookbooks /root/chef-solo/cookbooks/
+COPY --chown=jetty:jetty docker/chef-repo/cookbooks ${JETTY_BASE}/chef-solo/cookbooks/
 
 ADD --chown=jetty:jetty target/dcae-dt.war ${JETTY_BASE}/webapps/
 
-USER root
+COPY --chown=jetty:jetty docker/startup.sh ${JETTY_BASE}/ 
 
-COPY docker/startup.sh /root/
+RUN chmod 770 ${JETTY_BASE}/startup.sh
 
-RUN chmod 770 /root/startup.sh
-
-ENTRYPOINT [ "/root/startup.sh" ]
+ENTRYPOINT ${JETTY_BASE}/startup.sh
