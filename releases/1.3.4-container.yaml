@@ -1,0 +1,8 @@
+distribution_type: 'container'
+container_release_tag: '1.3.4'
+project: 'sdc-dcae-d-dt'
+log_dir: 'sdc-dcae-d-dt-maven-docker-stage-master/266'
+ref: dc5c8b277b3068013da8e26f0033f73c4a10437f
+containers:
+  - name: 'dcae-dt'
+    version: '1.3.4-20200401T0134'
